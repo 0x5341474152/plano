@@ -2,7 +2,8 @@ import "./task.css";
 import { useBro } from "../../context/brocon";
 import { Fragment, useEffect, useState } from "react";
 import { quotes } from "../../database/quotes";
-import {Todo} from "../../components/todo/todo"
+import {Todo} from "../../components/todo/todo";
+import {Weather} from "../../components/weather/weather"
 
 const index = Math.floor(Math.random() * quotes.length);
 const quote = quotes[index].quote;
@@ -47,6 +48,11 @@ export const Task = () => {
                 payload: userTask
             });
         }
+        if (new Date().getDate()!==Number(localStorage.getItem("date"))){
+            localStorage.removeItem("task");
+            localStorage.removeItem("date");
+            localStorage.removeItem("checkedStatus");
+        }
     }, [Brodispatch]);
 
     useEffect(() => {
@@ -88,6 +94,10 @@ export const Task = () => {
         localStorage.removeItem("checkedStatus");
     }
     return (
+        <div>
+        <div className="weather">
+            <Weather/>
+        </div>
         <div className="task-container d-flex direction-column align-center relative">
             <span className="time">{time}</span>
             <span className="message">{message}, {name}</span>
@@ -120,6 +130,7 @@ export const Task = () => {
             <div className="todo-btn-container absolute">
                 <button className="button cursor todo-btn" onClick={handleToDoClick}>ToDo</button>
             </div>
+        </div>
         </div>
     );
 };
