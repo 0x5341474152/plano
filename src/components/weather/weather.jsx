@@ -31,7 +31,7 @@ export const Weather = () => {
                         weather
                     }
                 } = await axios.get(
-                    `http://api.openweathermap.org/data/2.5/weather?lat=${location.latitude
+                    `https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude
                     }&lon=${Number(
                         location.longitude
                     )}&appid=${"de134159c8817db45dddd8d164dbaf2c"}&units=metric`
